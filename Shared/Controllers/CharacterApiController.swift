@@ -10,7 +10,7 @@ import Foundation
 let URL_CHARACTERS = "https://rickandmortyapi.com/api/character"
 
 
-final class ApiController : ObservableObject {
+final class CharacterApiController : ObservableObject {
     @Published var characters = [Character]()
     @Published var character: Character? = nil
     

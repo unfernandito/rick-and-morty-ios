@@ -14,8 +14,8 @@ struct Character: Codable, Identifiable {
     var species: String
     var type: String
     var gender: String
-    // var origin: Object
-    // var location: Location
+    var origin: LocationSimple
+    var location: LocationSimple
     var image: String
     var episode: [String]
     var url: String
