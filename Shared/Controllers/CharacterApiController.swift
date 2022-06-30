@@ -51,6 +51,6 @@ final class CharacterApiController : ObservableObject {
             DispatchQueue.main.async {
                 completion(character)
             }
-        })
+        }).resume()
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 struct Location: Codable, Identifiable {
     var id: Int
     var name: String
+    var type: String
     var dimension: String
     var residents: [String]
     var url: String

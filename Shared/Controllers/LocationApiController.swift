@@ -30,7 +30,7 @@ final class LocationApiController : ObservableObject {
             DispatchQueue.main.async {
                completion(locations)
             }
-        })
+        }).resume()
     }
     
     func loadDataLocation(locationID: Int, completion:@escaping (ApiResponse<Location>) -> ()){
@@ -50,6 +50,6 @@ final class LocationApiController : ObservableObject {
             DispatchQueue.main.async {
                completion(location)
             }
-        })
+        }).resume()
     }
 }

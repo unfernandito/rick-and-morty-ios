@@ -11,7 +11,6 @@ struct CharactersView: View {
     @State var characters = [Character]()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
             List(characters) { character in
                 HStack {
                     // Character Image
@@ -31,67 +30,62 @@ struct CharactersView: View {
                     }
                 }
             }
-            .onAppear(){
-                CharacterApiController().loadDataCharacters(completion: {characters in
-                    self.characters = characters.results
-                })
-            }
-        }
         .padding(0.0)
+        .onAppear(){
+            CharacterApiController().loadDataCharacters(completion: {characters in
+                self.characters = characters.results
+            })
+        }
     }
 }
 
 struct LocationsView: View {
     @State var locations = [Location]()
-    @State private var showAlert = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            List(locations) { location in
-                HStack {
-                    // Navigation Button
-                    NavigationLink(destination: LocationDetail()){
-                        Text("iddddd \(location.name)")
+        List(locations.filter({ element in !element.name.isEmpty && !element.type.isEmpty})) { location in
+            VStack(alignment: .leading, spacing: 10) {
+                // Navigation Button
+                NavigationLink(destination: LocationDetail(location: location)){
+                    HStack {
+                        Text(location.type)
+                            .font(.headline)
+                        Text(location.name)
                             .font(.body)
-                            .padding(.leading, 10)
                     }
-                    
+                    .padding(.leading, 10)
                 }
-            }
-            .onAppear(){
-                LocationApiController().loadDataLocations(completion: { locations in
-                    print(locations)
-                    
-                    self.locations = locations.results
-                    self.showAlert = true
-                })
-            }
-            .alert(isPresented: $showAlert) {
-                Alert(title:  Text("me carge"), message: Text("si señor"))
             }
         }
         .padding(0.0)
+        .onAppear(){
+            LocationApiController().loadDataLocations(completion: { locations in
+                self.locations = locations.results
+            })
+        }
     }
 }
 
 struct HomeView: View {
-    @State private var selectedTab = "One"
+    @State private var selectedTab = 1
     
     var body: some View {
-        TabView {
-            CharactersView()
+        NavigationView {
+            TabView( selection: $selectedTab) {
+                CharactersView()
+                    .tabItem {
+                        Label("Characters", systemImage: "person.fill")
+                            
+                    }.tag(1)
+                    .navigationTitle("Rick & Morty")
+                    .navigationBarTitleDisplayMode(.inline)
+                
+                LocationsView()
                 .tabItem {
-                    Label("Characters", systemImage: "tray.fill")
-                        .onTapGesture {
-                            selectedTab = "Two"
-                        }
-                        .tag("One")
-                }
-            
-            LocationsView()
-            .tabItem {
-                Label("Locations", systemImage: "sparkles")
-                    .tag("Two")
+                    Label("Locations", systemImage: "sparkles")
+                }.tag(2)
+                    .navigationTitle("Rick & Morty")
+                    .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
