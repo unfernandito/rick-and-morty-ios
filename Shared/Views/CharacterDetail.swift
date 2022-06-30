@@ -75,6 +75,14 @@ struct CharacterDetail_Previews: PreviewProvider {
             species: "Human",
             type: "",
             gender: "Male",
+            origin: LocationSimple(
+                name: "example",
+                url: ""
+            ),
+            location: LocationSimple(
+                name: "example",
+                url: ""
+            ),
             image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
             episode: [
                 "https://rickandmortyapi.com/api/episode/1",
