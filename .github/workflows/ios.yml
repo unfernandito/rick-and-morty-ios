@@ -13,7 +13,7 @@ on:
 jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-latest
+    runs-on: macos-12.4
     env:
         XCODE_VERSION: 13.4.1
 
@@ -26,6 +26,8 @@ jobs:
           default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
           echo $default | cat >default
           echo Using default scheme: $default
+      - name: Set Xcode
+        run: sudo xcode-select --switch /Applications/Xcode_${{ env.XCODE_VERSION }}.app
       - name: Create iOS Simulator
         run: |
           xcrun simctl create "iPhone 11" "com.apple.CoreSimulator.SimDeviceType.iPhone-11" "com.apple.CoreSimulator.SimRuntime.iOS-15-5"
