@@ -28,7 +28,7 @@ jobs:
           echo Using default scheme: $default
       - name: Create iOS Simulator
         run: |
-          xcrun simctl create "iPhone 11" "com.apple.CoreSimulator.SimDeviceType.iPhone-11" "com.apple.CoreSimulator.SimRuntime.iOS-15-6"
+          xcrun simctl create "iPhone 11" "com.apple.CoreSimulator.SimDeviceType.iPhone-11" "com.apple.CoreSimulator.SimRuntime.iOS-15-5"
       - name: Test
         env:
           scheme: ${{ 'default' }}
