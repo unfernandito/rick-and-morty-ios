@@ -81,9 +81,9 @@ struct HomeView: View {
                     .navigationBarTitleDisplayMode(.inline)
                 
                 LocationsView()
-                .tabItem {
-                    Label("Locations", systemImage: "sparkles")
-                }.tag(2)
+                    .tabItem {
+                        Label("Locations", systemImage: "sparkles")
+                    }.tag(2)
                     .navigationTitle("Rick & Morty")
                     .navigationBarTitleDisplayMode(.inline)
             }

@@ -38,6 +38,16 @@
                ReferencedContainer = "container:rick-and-morty-app.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C32A4D27286F65D500F44A9A"
+               BuildableName = "rick-and-morty-appTests.xctest"
+               BlueprintName = "rick-and-morty-appTests"
+               ReferencedContainer = "container:rick-and-morty-app.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -64,6 +74,11 @@
          <EnvironmentVariable
             key = "CFNETWORK_DIAGNOSTICS"
             value = "3"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "ENABLE_TESTING_SEARCH_PATHS"
+            value = "YES"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
