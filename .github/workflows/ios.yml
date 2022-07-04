@@ -33,7 +33,7 @@ jobs:
       - name: Create iOS Simulator
         run: |
           xcrun simctl list
-          xcrun simctl create "iPhone 11" "com.apple.CoreSimulator.SimDeviceType.iPhone-11" "com.apple.CoreSimulator.SimRuntime.iOS-15-4-1"
+          xcrun simctl create "iPhone 11" "com.apple.CoreSimulator.SimDeviceType.iPhone-11" "com.apple.CoreSimulator.SimRuntime.iOS-15-2"
       - name: Test
         env:
           scheme: ${{ 'default' }}
