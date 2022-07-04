@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C3E237702869F4CC0042C8B2"
@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C32A4D27286F65D500F44A9A"
+               BlueprintIdentifier = "C32A4D4D286F6D2300F44A9A"
                BuildableName = "rick-and-morty-appTests.xctest"
                BlueprintName = "rick-and-morty-appTests"
                ReferencedContainer = "container:rick-and-morty-app.xcodeproj">

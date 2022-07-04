@@ -22,7 +22,7 @@ struct CharacterDetail: View {
                 .frame(width: 240, height: 240)
                 .clipShape(Circle())
                 .overlay{
-                    Circle().stroke(.gray, lineWidth: 1)
+                    Circle().stroke(CharacterApiController().getCharacterStatus(status: characterSafe.status), lineWidth: 1.5)
                 }
                 .shadow(radius: 12)
                 

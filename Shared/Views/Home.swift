@@ -7,31 +7,51 @@
 
 import SwiftUI
 
-struct CharactersView: View {
+struct CharactersList: View {
     @State var characters = [Character]()
     
     var body: some View {
-            List(characters) { character in
-                HStack {
-                    // Character Image
-                    AsyncImage(url: URL(string: character.image)) { image in
-                        image.resizable()
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 64, height: 64)
-                    .clipShape(Circle())
-                    
-                    // Navigation Button
-                    NavigationLink(destination: CharacterDetail(character: character)){
-                        Text("\(character.name)")
-                            .font(.body)
-                            .padding(.leading, 10)
+        List(characters) { character in
+            HStack {
+                // Character Image
+                AsyncImage(url: URL(string: character.image)) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 64, height: 64)
+                .clipShape(Circle())
+                .overlay{
+                    Circle().stroke(CharacterApiController().getCharacterStatus(status: character.status), lineWidth: 1.5)
+                }
+                
+                // Navigation Button
+                NavigationLink(destination: CharacterDetail(character: character)){
+                    VStack {
+                        HStack {
+                            Text(character.name)
+                                .font(.headline)
+                                .padding(.leading, 10)
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            Text(character.species)
+                                .font(.body)
+                                .padding(.leading, 10)
+                            Spacer()
+                        }
                     }
                 }
             }
+        }
         .padding(0.0)
         .onAppear(){
+            CharacterApiController().loadDataCharacters(completion: {characters in
+                self.characters = characters.results
+            })
+        }
+        .refreshable {
             CharacterApiController().loadDataCharacters(completion: {characters in
                 self.characters = characters.results
             })
@@ -39,7 +59,7 @@ struct CharactersView: View {
     }
 }
 
-struct LocationsView: View {
+struct LocationsList: View {
     @State var locations = [Location]()
     
     var body: some View {
@@ -63,6 +83,41 @@ struct LocationsView: View {
                 self.locations = locations.results
             })
         }
+        .refreshable {
+            LocationApiController().loadDataLocations(completion: { locations in
+                self.locations = locations.results
+            })
+        }
+    }
+}
+
+struct EpisodesList: View {
+    @State var episodes = [Episode]()
+    
+    var body: some View {
+        List(episodes) { episode in
+            VStack(alignment: .leading, spacing: 10) {
+                // Navigation Button
+                NavigationLink(destination: EpisodeDetail(episode: episode)){
+                    HStack {
+                        Text(episode.name)
+                            .font(.headline)
+                    }
+                    .padding(.leading, 10)
+                }
+            }
+        }
+        .padding(0.0)
+        .onAppear(){
+            EpisodeApiController().loadDataEpisodes(completion: { episodes in
+                self.episodes = episodes.results
+            })
+        }
+        .refreshable {
+            EpisodeApiController().loadDataEpisodes(completion: { episodes in
+                self.episodes = episodes.results
+            })
+        }
     }
 }
 
@@ -72,7 +127,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             TabView( selection: $selectedTab) {
-                CharactersView()
+                CharactersList()
                     .tabItem {
                         Label("Characters", systemImage: "person.fill")
                             
@@ -80,10 +135,17 @@ struct HomeView: View {
                     .navigationTitle("Rick & Morty")
                     .navigationBarTitleDisplayMode(.inline)
                 
-                LocationsView()
+                LocationsList()
                     .tabItem {
                         Label("Locations", systemImage: "sparkles")
                     }.tag(2)
+                    .navigationTitle("Rick & Morty")
+                    .navigationBarTitleDisplayMode(.inline)
+                
+                EpisodesList()
+                    .tabItem{
+                        Label("Episodes", systemImage: "sparkles")
+                    }.tag(3)
                     .navigationTitle("Rick & Morty")
                     .navigationBarTitleDisplayMode(.inline)
             }
