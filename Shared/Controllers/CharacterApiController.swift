@@ -10,7 +10,6 @@ import SwiftUI
 
 let URL_CHARACTERS = "https://rickandmortyapi.com/api/character"
 
-
 final class CharacterApiController : ObservableObject {
     @Published var characters = [Character]()
     @Published var character: Character? = nil
@@ -53,18 +52,5 @@ final class CharacterApiController : ObservableObject {
                 completion(character)
             }
         }).resume()
-    }
-    
-    func getCharacterStatus(status: String) -> Color {
-        switch status {
-            case "unknown":
-                return Color.black
-            case "Alive":
-                return Color.green
-            case "Dead":
-                return Color.red
-            default:
-                return Color.red
-        }
     }
 }

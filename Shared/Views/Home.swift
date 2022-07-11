@@ -22,7 +22,7 @@ struct CharactersList: View {
                 .frame(width: 64, height: 64)
                 .clipShape(Circle())
                 .overlay{
-                    Circle().stroke(CharacterApiController().getCharacterStatus(status: character.status), lineWidth: 1.5)
+                    Circle().stroke(CharacterController().getCharacterStatus(status: character.status), lineWidth: 1.5)
                 }
                 
                 // Navigation Button
@@ -125,31 +125,32 @@ struct HomeView: View {
     @State private var selectedTab = 1
     
     var body: some View {
-        NavigationView {
-            TabView( selection: $selectedTab) {
-                CharactersList()
-                    .tabItem {
-                        Label("Characters", systemImage: "person.fill")
-                            
-                    }.tag(1)
-                    .navigationTitle("Rick & Morty")
-                    .navigationBarTitleDisplayMode(.inline)
-                
-                LocationsList()
-                    .tabItem {
-                        Label("Locations", systemImage: "sparkles")
-                    }.tag(2)
-                    .navigationTitle("Rick & Morty")
-                    .navigationBarTitleDisplayMode(.inline)
-                
-                EpisodesList()
-                    .tabItem{
-                        Label("Episodes", systemImage: "sparkles")
-                    }.tag(3)
-                    .navigationTitle("Rick & Morty")
-                    .navigationBarTitleDisplayMode(.inline)
-            }
+        return TabView( selection: $selectedTab) {
+            CharactersList()
+                .tabItem {
+                    Label("Characters", systemImage: "person.fill")
+                        .foregroundColor(ColorScheme.text)
+                }.tag(1)
+                .navigationTitle("Rick & Morty")
+                .navigationBarTitleDisplayMode(.inline)
+            
+            LocationsList()
+                .tabItem {
+                    Label("Locations", systemImage: "sparkles")
+                        .foregroundColor(ColorScheme.text)
+                }.tag(2)
+                .navigationTitle("Rick & Morty")
+                .navigationBarTitleDisplayMode(.inline)
+            
+            EpisodesList()
+                .tabItem{
+                    Label("Episodes", systemImage: "sparkles")
+                        .foregroundColor(ColorScheme.text)
+                }.tag(3)
+                .navigationTitle("Rick & Morty")
+                .navigationBarTitleDisplayMode(.inline)
         }
+        .tint(ColorScheme.text)
     }
 }
 

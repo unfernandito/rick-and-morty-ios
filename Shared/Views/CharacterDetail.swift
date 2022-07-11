@@ -22,7 +22,7 @@ struct CharacterDetail: View {
                 .frame(width: 240, height: 240)
                 .clipShape(Circle())
                 .overlay{
-                    Circle().stroke(CharacterApiController().getCharacterStatus(status: characterSafe.status), lineWidth: 1.5)
+                    Circle().stroke(CharacterController().getCharacterStatus(status: characterSafe.status), lineWidth: 1.5)
                 }
                 .shadow(radius: 12)
                 
@@ -31,8 +31,10 @@ struct CharacterDetail: View {
                         Text("Status:")
                             .padding(.leading, 10)
                             .font(.headline)
+                            .foregroundColor(Color("Text"))
                         
                         Text("\(characterSafe.status)")
+                            .foregroundColor(Color("Text"))
                     }
                     Divider()
                     
@@ -40,17 +42,21 @@ struct CharacterDetail: View {
                         Text("Specie:")
                             .padding(.leading, 10)
                             .font(.headline)
+                            .foregroundColor(Color("Text"))
                         
                         Text("\(characterSafe.species)")
+                            .foregroundColor(Color("Text"))
                     }
                     Divider()
                     
                     HStack {
                         Text("Gender:")
+                            .foregroundColor(Color("Text"))
                             .padding(.leading, 10)
                             .font(.headline)
                         
                         Text("\(characterSafe.gender)")
+                            .foregroundColor(Color("Text"))
                     }
                 }
                 
@@ -59,7 +65,9 @@ struct CharacterDetail: View {
             .padding(.top, 15.0)
             .navigationTitle("\(characterSafe.id)-\(characterSafe.name) Detail")
             .navigationBarTitleDisplayMode(.inline)
-            .background(.ultraThickMaterial)
+            .background(ColorScheme.background)
+            .foregroundColor(ColorScheme.background)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             ProgressView()
         }
